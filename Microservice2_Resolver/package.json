@@ -11,9 +11,9 @@
     "mqtt": "^5.10.3"
   },
   "scripts": {
-    "start1": "cross-env PORTNUMMER=9001 node src/main.js",
-    "start2": "cross-env PORTNUMMER=9002 node src/main.js",
-    "start1prod": "cross-env PORTNUMMER=9001 NODE_ENV=production node src/main.js",
-    "start2prod": "cross-env PORTNUMMER=9002 NODE_ENV=production node src/main.js"
+    "start1": "cross-env PORTNUMMER=8001 node src/main.js",
+    "start2": "cross-env PORTNUMMER=8002 node src/main.js",
+    "start1prod": "cross-env PORTNUMMER=8001 NODE_ENV=production node src/main.js",
+    "start2prod": "cross-env PORTNUMMER=8002 NODE_ENV=production node src/main.js"
   }
 }

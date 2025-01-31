@@ -19,7 +19,7 @@ kafkaEmpfaengerStarten();
 
 
 // Web-Server starten
-const PORTNUMMER = 10000;
+const PORTNUMMER = 9000;
 app.listen( PORTNUMMER,
             () => { logger.info(`Web-Server auf Port ${PORTNUMMER} gestartet.\n`); }
           );

@@ -1,8 +1,7 @@
 import logging from "logging";
 
 import { getByKuerzel, upsert    } from "./datenbank.js";
-//import { sendeStatistikNachricht } from "./kafka-sender.js";
-
+import { sendeStatistikNachricht } from "./mqtt-sender.js";
 
 const logger = logging.default("service");
 
@@ -66,7 +65,7 @@ async function statistikNachrichtSenden(kuerzel, erfolg, userAgentString) {
         userAgent : userAgentString
     };
 
-    //await sendeStatistikNachricht(statistikObjekt);
+    await sendeStatistikNachricht(statistikObjekt);
 }
 
 

@@ -22,10 +22,10 @@ Ergebnis-Seiten.
 
 | Microservice         | Instanz          | Portnummer                      |
 | -------------------- | ---------------- | ------------------------------- |
-| Shortlink Definition | Nur eine Instanz |  [8000](http://localhost:8000)  |
-| Shortlink Resolver   | Instanz 1        |  [9001](http://localhost:9001)  |
-| Shortlink Resolver   | Instanz 2        |  [9002](http://localhost:9002)  |
-| Statistiken          | Nur eine Instanz | [10000](http://localhost:10000) |
+| Shortlink Definition | Nur eine Instanz |  [7000](http://localhost:7000)  |
+| Shortlink Resolver   | Instanz 1        |  [8001](http://localhost:8001)  |
+| Shortlink Resolver   | Instanz 2        |  [8002](http://localhost:8002)  |
+| Statistiken          | Nur eine Instanz |  [9000](http://localhost:9000)  |
 
 <br>
 

@@ -6,11 +6,14 @@ import mqttKonfiguration        from '../../mqtt-konfiguration.js';
 
 const logger = logging.default( "mqtt-empfaenger" );
 
-const mqttClient =
-    await mqtt.connectAsync( mqttKonfiguration.url, {
-        username: mqttKonfiguration.nutzername,
-        password: mqttKonfiguration.passwort
-    } );
+
+const authObjekt = {
+                     username: mqttKonfiguration.nutzername,
+                     password: mqttKonfiguration.passwort
+                   };
+
+const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
+                                            authObjekt );
 
 logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
 
@@ -24,7 +27,7 @@ export async function mqttEmpfaengerStarten() {
 
     try {
 
-        mqttClient.subscribe( mqttKonfiguration.topic );
+        mqttClient.subscribe( mqttKonfiguration.topic1 );
 
         mqttClient.on( "message", async ( topic, payload ) => {
 

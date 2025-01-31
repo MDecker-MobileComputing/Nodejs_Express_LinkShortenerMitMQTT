@@ -5,11 +5,13 @@ import mqttKonfiguration from '../../mqtt-konfiguration.js';
 
 const logger = logging.default( "mqtt-sender" );
 
-const mqttClient =
-    await mqtt.connectAsync( mqttKonfiguration.url, {
-        username: mqttKonfiguration.nutzername,
-        password: mqttKonfiguration.passwort
-    } );
+const authObjekt = {
+                     username: mqttKonfiguration.nutzername,
+                     password: mqttKonfiguration.passwort
+                   };
+
+const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
+                                            authObjekt );
 
 logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
 
@@ -39,7 +41,7 @@ export async function sendeMqttNachricht( shortlinkObjekt ) {
 
         const shortlinkObjektAlsJsonString = JSON.stringify( transportObjekt );
 
-        await mqttClient.publishAsync( mqttKonfiguration.topic, shortlinkObjektAlsJsonString );
+        await mqttClient.publishAsync( mqttKonfiguration.topic1, shortlinkObjektAlsJsonString );
 
         logger.info( `MQTT-Nachricht gesendet für Shortlink "${shortlinkObjekt.kuerzel}".` );
 
