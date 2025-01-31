@@ -1,0 +1,33 @@
+{% extends "basis.njk" %}
+
+{% block inhalt %}
+<p>
+   
+   Monats-Statistik für Shortlink mit Kürzel <tt>{{ kuerzel }}</tt>:
+
+   <br><br>
+
+   {% if ergebnis_array.length == 0 %}
+
+   <p>keine Zugriffe im Monat</p>
+
+   {% else %}
+
+   <ul>
+
+      {% for ergebnis in ergebnis_array %}
+      <li>
+         <strong>{{ ergebnis.datum }}:</strong>          
+         {{ ergebnis.anzahl_erfolg    }} erfolgreiche Zugriffe,
+         {{ ergebnis.anzahl_erfolglos }} erfolglose Zugriffe
+      </li>
+      {% endfor %}
+      
+   </ul>
+   <br><br>
+
+   Anzahl Tage im Monat mit mindestens einem Zugriff: {{ ergebnis_array.length }}
+
+   {% endif %}
+</p>
+{% endblock %}

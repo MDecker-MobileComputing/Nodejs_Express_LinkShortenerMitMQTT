@@ -1,0 +1,22 @@
+{% extends "basis.njk" %}
+
+{% block inhalt %}
+<p>
+   Tages-Statistik für Shortlink mit Kürzel <tt>{{ kuerzel }}</tt>:
+
+   {% if anzahl_erfolg == 0 and anzahl_erfolglos == 0 %}
+
+      <strong>Keine Zugriffe für diesen Tag</strong>
+
+   {% else %}
+
+      <ul>
+         <li>Tag                  : {{ datum | datum()  }} </li>
+         <li>Erfolgreiche Zugriffe: {{ anzahl_erfolg    }} </li>
+         <li>Erfolglose   Zugriffe: {{ anzahl_erfolglos }} </li>
+      </ul>
+
+   {% endif %}
+   
+</p>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "name": "shortlink_definition",
+  "type": "module",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "express": "^4.18.3",
+    "logging": "^3.3.0",
+    "lowdb": "^7.0.1",
+    "mqtt": "^5.10.3",
+    "validator": "^13.11.0"
+  },
+  "scripts": {
+    "start": "cross-env node src/main.js",
+    "start-loglevel-debug": "cross-env DEBUG=mw-individuell node src/main.js"
+  }
+}

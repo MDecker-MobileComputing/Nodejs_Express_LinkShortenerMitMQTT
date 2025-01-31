@@ -1,0 +1,13 @@
+{
+  "name": "shortlink_service",
+  "description": "Link-Shortener bestehend aus drei Microservices",
+  "author": "MDecker-MobileComputing",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "installieren": "concurrently -n MS1,MS2,MS3 \"cd Microservice1_Definition && npm i\" \"cd Microservice2_Resolver && npm i\" \"cd Microservice3_Statistiken && npm i\"",
+    "starten": "concurrently -n MS1,MS2a,MS2b,MS3 \"cd Microservice1_Definition && npm start\" \"cd Microservice2_Resolver && npm run start1\" \"cd Microservice2_Resolver && npm run start2\" \"cd Microservice3_Statistiken && npm start\""
+  }
+}

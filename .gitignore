@@ -1,0 +1,10 @@
+
+# Mit "npm install" heruntergeladene Bibliotheken
+node_modules/
+
+# Datenbankdateien von lowdb
+datenbank-*.json
+db.json
+
+# Nutzername+Passwort für Kafka-Server
+kafka-sasl.js

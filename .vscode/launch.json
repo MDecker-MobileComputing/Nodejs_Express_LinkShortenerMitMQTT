@@ -1,0 +1,67 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "MS 'Link Definition' starten",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Microservice1_Definition/src/main.js",
+            "cwd": "${workspaceFolder}/Microservice1_Definition"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "MS 'Link Resolver' (Instanz 1) starten",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
+            "cwd": "${workspaceFolder}/Microservice2_Resolver",
+            "env": {
+                "PORTNUMMER": "9001"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "MS 'Link Resolver' (Instanz 2) starten",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
+            "cwd": "${workspaceFolder}/Microservice2_Resolver",
+            "env": {
+                "PORTNUMMER": "9002"
+            }
+        }, {
+                "type": "node",
+                "request": "launch",
+                "name": "MS 'Statistiken' starten",
+                "skipFiles": [
+                    "<node_internals>/**"
+                ],
+                "program": "${workspaceFolder}/Microservice3_Statistiken/src/main.js",
+                "cwd": "${workspaceFolder}/Microservice3_Statistiken"
+        }, 
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Alle vier Microservice-Instanzen starten",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "starten"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
