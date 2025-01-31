@@ -7,4 +7,4 @@ datenbank-*.json
 db.json
 
 # Nutzername+Passwort für Kafka-Server
-kafka-sasl.js
+mqtt-konfiguration.js
