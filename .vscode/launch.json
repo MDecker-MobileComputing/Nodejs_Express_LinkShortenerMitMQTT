@@ -24,7 +24,7 @@
             "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
             "cwd": "${workspaceFolder}/Microservice2_Resolver",
             "env": {
-                "PORTNUMMER": "9001"
+                "PORTNUMMER": "8001"
             }
         },
         {
@@ -37,7 +37,7 @@
             "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
             "cwd": "${workspaceFolder}/Microservice2_Resolver",
             "env": {
-                "PORTNUMMER": "9002"
+                "PORTNUMMER": "8002"
             }
         }, {
                 "type": "node",
@@ -48,7 +48,7 @@
                 ],
                 "program": "${workspaceFolder}/Microservice3_Statistiken/src/main.js",
                 "cwd": "${workspaceFolder}/Microservice3_Statistiken"
-        }, 
+        },
         {
             "type": "node",
             "request": "launch",

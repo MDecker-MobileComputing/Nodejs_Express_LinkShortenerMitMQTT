@@ -3,7 +3,7 @@ import logging from "logging";
 import { getByKuerzel, upsert    } from "./datenbank.js";
 import { sendeStatistikNachricht } from "./mqtt-sender.js";
 
-const logger = logging.default("service");
+const logger = logging.default( "service" );
 
 
 /**
@@ -16,29 +16,29 @@ const logger = logging.default("service");
  * @returns Objekt mit URL und Beschreibung des Shortlinks oder leeres Objekt,
  *          wenn nicht gefunden oder gefundener Shortlink deaktiviert ist.
  */
-export async function shortlinkAufloesen(kuerzel, userAgentString) {
+export async function shortlinkAufloesen( kuerzel, userAgentString ) {
 
-    const dbErgebnisObjekt = getByKuerzel(kuerzel);
-    if (dbErgebnisObjekt === undefined) {
+    const dbErgebnisObjekt = getByKuerzel( kuerzel );
+    if ( dbErgebnisObjekt === undefined ) {
 
-        logger.info(`Kürzel nicht gefunden: ${kuerzel}`);
-        await statistikNachrichtSenden(kuerzel, false, userAgentString);
+        logger.info( `Kürzel nicht gefunden: ${kuerzel}` );
+        await statistikNachrichtSenden( kuerzel, false, userAgentString );
 
         return {};
 
     } else {
 
-        if (dbErgebnisObjekt.ist_aktiv === false) {
+        if ( dbErgebnisObjekt.ist_aktiv === false ) {
 
-            logger.info(`Kürzel gefunden, ist aber deaktiviert: ${kuerzel}`);
-            await statistikNachrichtSenden(kuerzel, false, userAgentString);
+            logger.info( `Kürzel gefunden, ist aber deaktiviert: ${kuerzel}` );
+            await statistikNachrichtSenden( kuerzel, false, userAgentString );
 
             return {};
 
         } else {
 
-            logger.info(`Kürzel gefunden, ist aktiv: ${kuerzel}`);
-            await statistikNachrichtSenden(kuerzel, true, userAgentString);
+            logger.info( `Kürzel gefunden, ist aktiv: ${kuerzel}` );
+            await statistikNachrichtSenden( kuerzel, true, userAgentString );
 
             return dbErgebnisObjekt;
         }
@@ -56,7 +56,7 @@ export async function shortlinkAufloesen(kuerzel, userAgentString) {
  *
  * @param {string} userAgentString User-Agent-String des Browsers
  */
-async function statistikNachrichtSenden(kuerzel, erfolg, userAgentString) {
+async function statistikNachrichtSenden( kuerzel, erfolg, userAgentString ) {
 
     const statistikObjekt = {
         kuerzel   : kuerzel,
@@ -65,7 +65,7 @@ async function statistikNachrichtSenden(kuerzel, erfolg, userAgentString) {
         userAgent : userAgentString
     };
 
-    await sendeStatistikNachricht(statistikObjekt);
+    await sendeStatistikNachricht( statistikObjekt );
 }
 
 
@@ -74,19 +74,19 @@ async function statistikNachrichtSenden(kuerzel, erfolg, userAgentString) {
  *
  * @param {*} shortlinkObjekt Neues oder zu aktualisierendes Shortlink-Objekt.
  */
-export async function neuOderAktualisieren(shortlinkObjekt) {
+export async function neuOderAktualisieren( shortlinkObjekt ) {
 
     const kuerzel = shortlinkObjekt.kuerzel;
 
-    const dbErgebnisObjekt = getByKuerzel(kuerzel);
-    if (dbErgebnisObjekt === undefined) {
+    const dbErgebnisObjekt = getByKuerzel( kuerzel );
+    if ( dbErgebnisObjekt === undefined ) {
 
-        logger.info(`Versuche neuen Shortlink in DB zu speichern: ${kuerzel}`);
+        logger.info( `Versuche neuen Shortlink in DB zu speichern: ${kuerzel}` );
 
     } else {
 
-        logger.info(`Versuche Shortlink in DB zu aktualisieren: ${kuerzel}`);
+        logger.info( `Versuche Shortlink in DB zu aktualisieren: ${kuerzel}` );
     }
 
-    await upsert(shortlinkObjekt);
+    await upsert( shortlinkObjekt );
 }

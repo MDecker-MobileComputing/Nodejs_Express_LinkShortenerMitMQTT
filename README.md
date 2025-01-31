@@ -2,13 +2,14 @@
 
 <br>
 
-Einfacher [Link-Shortener-Dienst](https://de.wikipedia.org/wiki/Kurz-URL-Dienst) mit Microservice-Architektur und [Nodejs](https://nodejs.org/en/about):
+Einfacher [Link-Shortener-Dienst](https://de.wikipedia.org/wiki/Kurz-URL-Dienst) mit Microservice-Architektur
+und [Nodejs](https://nodejs.org/en/about):
 
 * Der Microservice "Shortlink Definition" schickt neue Shortlink-Definition via [MQTT](https://mqtt.org/)
-an die Instanzen des Microservice "Shortlink Resolver".
+  an die Instanzen des Microservice "Shortlink Resolver".
 
-* Der Resolver-Dienst verwendet die Template-Engine [Nunjucks](https://mozilla.github.io/nunjucks/) zur Erzeugung der
-Ergebnis-Seiten.
+* Der Resolver-Dienst verwendet die Template-Engine [Nunjucks](https://mozilla.github.io/nunjucks/) zur Erzeugung
+  der Ergebnis-Seiten.
 
 * Es gibt auch noch einen Statistik-Service der weitere Möglichkeiten mit Nunjucks demonstriert.
 

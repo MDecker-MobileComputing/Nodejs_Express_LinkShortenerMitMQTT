@@ -4,7 +4,7 @@ import { getShortlinkByKuerzel } from "./datenbank.js";
 import { upsert                } from "./datenbank.js";
 import { sendeMqttNachricht    } from "./mqtt-sender.js";
 
-const logger = logging.default("service");
+const logger = logging.default( "service" );
 
 
 /**
@@ -16,7 +16,7 @@ function passwortGenerieren() {
 
     // die ersten beiden Zeichen im String sind immer "0.1",
     // da der Wert von Math.random() immer zwischen 0.0 und 1.0 liegt
-    return Math.random().toString(36).substring(2, 8);
+    return Math.random().toString( 36 ).substring( 2, 8 );
 }
 
 
@@ -37,12 +37,12 @@ function passwortGenerieren() {
  *                  Bei Fehlern ist entweder das Attribut `nutzerfehler` oder `mqttFehler`
  *                  gesetzt.
  */
-export async function shortlinkNeu(shortlinkObjekt) {
+export async function shortlinkNeu( shortlinkObjekt ) {
 
     const dbErgebnis = await getShortlinkByKuerzel( shortlinkObjekt.kuerzel );
-    if (dbErgebnis) {
+    if ( dbErgebnis ) {
 
-        logger.info(`Shortlink existiert bereits: ${shortlinkObjekt.kuerzel}`);
+        logger.info( `Shortlink existiert bereits: ${shortlinkObjekt.kuerzel}` );
         return { nutzerfehler: "Shortlink existiert bereits" };
     }
 
@@ -55,7 +55,7 @@ export async function shortlinkNeu(shortlinkObjekt) {
     await upsert( shortlinkObjekt );
 
     const mqttErfolg = await sendeMqttNachricht( shortlinkObjekt );
-    if (mqttErfolg) {
+    if ( mqttErfolg ) {
 
         return {}; // leeres Fehlerobjekt
 
@@ -76,26 +76,26 @@ export async function shortlinkNeu(shortlinkObjekt) {
  *
  * @param {*} istAktiv Neuer Wert für `ist_aktiv` oder `null`, wenn nicht geändert werden soll.
  */
-export async function shortlinkAendern(kuerzel, beschreibung, istAktiv) {
+export async function shortlinkAendern( kuerzel, beschreibung, istAktiv ) {
 
     const shortlinkAlt = await getShortlinkByKuerzel( kuerzel );
 
     shortlinkAlt.geaendert_am = new Date().toISOString();
-    if (beschreibung) {
+    if ( beschreibung ) {
 
         shortlinkAlt.beschreibung = beschreibung;
-        logger.info(`Beschreibung für Shortlink "${kuerzel}" geändert auf: ${beschreibung}`);
+        logger.info( `Beschreibung für Shortlink "${kuerzel}" geändert auf: ${beschreibung}` );
     }
-    if (istAktiv != null && istAktiv != undefined) {
+    if ( istAktiv != null && istAktiv != undefined ) {
 
         shortlinkAlt.ist_aktiv = istAktiv;
-        logger.info(`Aktiv-Status für Shortlink "${kuerzel}" geändert auf: ${istAktiv}`);
+        logger.info( `Aktiv-Status für Shortlink "${kuerzel}" geändert auf: ${istAktiv}` );
     }
 
     await upsert( shortlinkAlt ); // *** eigentliche Änderungsoperation auf der DB ***
 
     const mqttErfolg = await sendeMqttNachricht( shortlinkAlt );
-    if (mqttErfolg) {
+    if ( mqttErfolg ) {
 
         return {}; // leeres Fehlerobjekt
 
@@ -116,16 +116,16 @@ export async function shortlinkAendern(kuerzel, beschreibung, istAktiv) {
  *
  * @returns `true` wenn das Passwort korrekt ist, sonst `false`.
  */
-export function pruefeAenderungspasswort(kuerzel, passwort) {
+export function pruefeAenderungspasswort( kuerzel, passwort ) {
 
-    const shortlinkObjekt = getShortlinkByKuerzel(kuerzel);
-    if (!shortlinkObjekt) {
+    const shortlinkObjekt = getShortlinkByKuerzel( kuerzel );
+    if ( !shortlinkObjekt ) {
 
-        logger.error(`Interner Fehler: Shortlink mit Kürzel ${kuerzel} nicht gefunden.`);
+        logger.error( `Interner Fehler: Shortlink mit Kürzel ${kuerzel} nicht gefunden.` );
         return false;
     }
 
-    if (shortlinkObjekt.passwort === passwort) {
+    if ( shortlinkObjekt.passwort === passwort ) {
 
         return true;
     }
