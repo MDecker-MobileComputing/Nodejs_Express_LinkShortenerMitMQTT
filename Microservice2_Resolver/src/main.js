@@ -5,7 +5,7 @@ import moment             from "moment";
 
 import { routenRegistrieren      } from "./controller.js";
 import { datenbankInitialisieren } from "./datenbank.js";
-import { kafkaEmpfaengerStarten  } from "./kafka-empfaenger.js";
+import { mqttEmpfaengerStarten   } from "./mqtt-empfaenger.js";
 
 
 const logger = logging.default("main-resolver");
@@ -45,6 +45,4 @@ app.listen( PORTNUMMER,
             () => { logger.info(`Web-Server auf Port ${PORTNUMMER} gestartet.\n`); }
           );
 
-
-// Kafka-Konsument starten
-kafkaEmpfaengerStarten(PORTNUMMER);
+mqttEmpfaengerStarten();
