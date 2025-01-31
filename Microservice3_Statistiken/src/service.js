@@ -4,7 +4,7 @@ import useragent from "useragent";
 import { insert }                        from "./datenbank.js";
 import { queryRecordsByKuerzelUndDatum } from "./datenbank.js";
 import { queryRecordsByKuerzelUndMonat } from "./datenbank.js";
-import { sendeBrowserDaten }             from "./kafka-sender.js";
+//import { sendeBrowserDaten }             from "./kafka-sender.js";
 
 
 const logger = logging.default("service");
@@ -25,7 +25,7 @@ export async function statistikDatensatzVerbuchen(statistikObjekt) {
 
     logger.info(`Statistik-Datensatz verbucht: ${JSON.stringify(statistikObjekt)}`);
 
-    await erstelleBrowserStatistikObjekt(statistikObjekt.userAgent);
+    //await erstelleBrowserStatistikObjekt(statistikObjekt.userAgent);
 }
 
 
@@ -45,7 +45,7 @@ async function erstelleBrowserStatistikObjekt(userAgentString) {
     } else {
 
         logger.error(`Browsername "${browserName}" und Betriebssystem "${betriebssystem}" konnten nicht via Kafka gesendet werden.`);
-    }    
+    }
 }
 
 
@@ -96,11 +96,11 @@ export function getStatsFuerTagUndLink(kuerzel, datum) {
 /**
  * Ermittelt die Anzahl der erfolgreichen und erfolglosen Zugriffe für den Shortlink
  * mit dem angegebenen Kürzel im angegebenen Monat.
- * 
+ *
  * @param {*} kuerzel Kürzel des Shortlinks
- * 
+ *
  * @param {*} monat   Monat im Format "YYYY-MM", z.B. "2024-03"
- * 
+ *
  * @return {Array} Array mit Objekten, die die Anzahl der erfolgreichen und erfolglosen
  *                 Zugriffe für jeden Tag im Monat enthalten; kann leerer Array sein,
  *                 aber nicht `null`.
@@ -108,9 +108,9 @@ export function getStatsFuerTagUndLink(kuerzel, datum) {
 export function getStatsFuerMonatUndLink(kuerzel, monat) {
 
     const datensaetzeArray = queryRecordsByKuerzelUndMonat(kuerzel, monat); // sortiert nach aufsteigendem Tag
-    if (datensaetzeArray.length === 0) { 
-        
-        return []; 
+    if (datensaetzeArray.length === 0) {
+
+        return [];
     }
 
     const ergebnisArray = [];
@@ -124,18 +124,18 @@ export function getStatsFuerMonatUndLink(kuerzel, monat) {
         const datumVonDatensatz = datensatz.datum;
         if (aktuellerTag === datumVonDatensatz) {
 
-            if (datensatz.erfolg === true) { aktuellesErgebnisObjekt.anzahl_erfolg++; }                
+            if (datensatz.erfolg === true) { aktuellesErgebnisObjekt.anzahl_erfolg++; }
             else { aktuellesErgebnisObjekt.anzahl_erfolglos++; }
 
         } else { // neuen Tag anfangen
-            
+
             aktuellerTag = datumVonDatensatz;
             aktuellesErgebnisObjekt = { "datum" : aktuellerTag, "anzahl_erfolg" : 0, "anzahl_erfolglos" : 0 };
             ergebnisArray.push(aktuellesErgebnisObjekt);
 
-            if (datensatz.erfolg === true) { aktuellesErgebnisObjekt.anzahl_erfolg++; }                
+            if (datensatz.erfolg === true) { aktuellesErgebnisObjekt.anzahl_erfolg++; }
             else { aktuellesErgebnisObjekt.anzahl_erfolglos++; }
-        }        
+        }
     }
 
     return ergebnisArray;

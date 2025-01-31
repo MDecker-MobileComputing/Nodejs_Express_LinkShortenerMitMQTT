@@ -1,82 +1,50 @@
 import logging             from "logging";
-import { Kafka, logLevel } from "kafkajs";
 
-import plainNutzernamePasswort         from '../../kafka-sasl.js';
+import mqttKonfiguration               from '../../mqtt-konfiguration.js';
 import { statistikDatensatzVerbuchen } from "./service.js";
 
 
-const logger = logging.default("kafka-empfaenger");
+const logger = logging.default( "mqtt-empfaenger" );
 
-const clientUndGroupId = "nodejs-shortlink-stats-empfaenger";
+const authObjekt = {
+    username: mqttKonfiguration.nutzername,
+    password: mqttKonfiguration.passwort
+  };
+
+const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
+                           authObjekt );
+
+logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
 
 
 /**
- * Kafka-Empfänger für Statistik-Events starten.
- * <br><br>
- *
- * Diese Funktion darf erst aufgerufen werden, wenn das Topic existiert!
+ * MQTT-Empfänger für Statistik-Events starten.
  */
-export async function kafkaEmpfaengerStarten() {
-
-    let kafka = null;
-
-    if (plainNutzernamePasswort.username) {
-
-        logger.info("Konfiguration für entfernten Kafka-Server erkannt.");
-
-        kafka = new Kafka({ clientId: clientUndGroupId,
-                            brokers: ["zimolong.eu:9092"],
-                            sasl: plainNutzernamePasswort,
-                            ssl: false, // Disabling SSL as you're using SASL_PLAINTEXT
-                            connectionTimeout: 1000,
-                            authenticationTimeout: 1000,
-                            logLevel: logLevel.ERROR
-                          });
-    } else {
-
-        logger.info("Konfiguration für lokalen Kafka-Server erkannt.");
-
-        kafka = new Kafka({ brokers: [ "localhost:9092" ],
-                            clientId: clientUndGroupId,
-                            logLevel: logLevel.ERROR
-                          });
-    }
+export async function mqttEmpfaengerStarten() {
 
     try {
 
-        // GroupID hängt von Port-Nummer ab, damit jede Instanz des Microservices eine eigene GroupID hat
-        // und somit alle Microservice-Instanzen alle Nachrichten empfangen.
-        const consumer = kafka.consumer({ groupId: clientUndGroupId });
+        mqttClient.subscribe( mqttKonfiguration.topic2 );
 
-        await consumer.connect();
+        mqttClient.on( "message", async ( topic, payload ) => {
 
-        await consumer.subscribe({ topic: "Dozent.Decker.ResolverStats" });
+            try {
 
-        await consumer.run({
-            eachMessage: async ({ topic, partition, message }) => {
+                const payloadObjekt = JSON.parse( payload );
 
-                const schluessel    = message.key.toString();
-                const payloadString = message.value.toString();
-                logger.info(`Statistik-Nachricht für Kürzel "${schluessel}" empfangen: ${payloadString}`);
+                await statistikDatensatzVerbuchen( payloadObjekt ); // Service-Funktion aufrufen für Verbuchung in DB
+            }
+            catch ( jsonFehler ) {
 
-                try {
-
-                    const payloadObjekt = JSON.parse(payloadString);
-
-                    statistikDatensatzVerbuchen(payloadObjekt);
-                }
-                catch (jsonFehler) {
-
-                    logger.error(`Fehler beim Parsen der JSON-Payload: ${jsonFehler}`);
-                }
-            },
+                logger.error( `Fehler beim Parsen der JSON-Payload: ${jsonFehler}` );
+            }
         });
 
-        logger.info(`Kafka-Consumer mit Client+GroupID "${clientUndGroupId}" gestartet.`);
+        logger.info( `MQTT-Subscription für Topic ${mqttKonfiguration.topi2} gestartet.` );
     }
     catch (error) {
 
-        logger.error(`Fehler beim Starten des Kafka-Consumers: ${error}`);
+        logger.error( `Fehler beim Starten des MQTT-Consumers: ${error}` );
     }
 }
 
