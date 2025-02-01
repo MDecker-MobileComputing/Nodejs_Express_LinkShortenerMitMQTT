@@ -54,8 +54,8 @@ async function postShortlink(request, response) {
     const beschreibung = request.body.beschreibung;
 
     const objNeu = {
-        kuerzel: kuerzel,
-        url: url,
+        kuerzel     : kuerzel,
+        url         : url,
         beschreibung: beschreibung
     };
 
@@ -63,17 +63,17 @@ async function postShortlink(request, response) {
     if (fehlerObjekt.nutzerfehler) {
 
         response.status(409) // Conflict
-                .send({ "nachricht: ": `Shortlink existiert bereits: ${kuerzel}`});
+                .send({ "nachricht": `Shortlink mit Code/Kürzel "${kuerzel}" existiert bereits.`});
         return;
     }
     if (fehlerObjekt.mqttFehler) {
 
         response.status(500) // Internal Server Error
-                .send({ "nachricht: ": "Shortlink konnte nicht über MQTT versendet werden."});
+        .send({ "nachricht": `Shortlink mit Code/Kürzel "${kuerzel}" konnte nicht über MQTT versendet werden.`});
         return;
     }
 
-    objNeu.ergebnis_link = `http://localhost:9001/r/${kuerzel}`;
+    objNeu.ergebnisLink = `http://localhost:9001/r/${kuerzel}`;
 
     response.status(201) // Created
             .send(objNeu);

@@ -3,6 +3,7 @@ import logging           from "logging";
 import mqtt              from "mqtt";
 import mqttKonfiguration from '../../mqtt-konfiguration.js';
 
+
 const logger = logging.default( "mqtt-sender" );
 
 const authObjekt = {
@@ -33,6 +34,7 @@ export async function sendeMqttNachricht( shortlinkObjekt ) {
         // Neues Objekt für MQTT-Nachricht erstellen, das nur die benötigten
         // Attribute enthält (Passwort darf nicht über MQTT gesendet werden).
         const transportObjekt = {
+
             kuerzel     : shortlinkObjekt.kuerzel,
             url         : shortlinkObjekt.url,
             beschreibung: shortlinkObjekt.beschreibung,

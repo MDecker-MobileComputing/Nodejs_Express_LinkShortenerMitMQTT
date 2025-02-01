@@ -1,11 +1,14 @@
 "use strict";
 
-let divErgebnis       = null;
-let buttonAnlegen     = null;
-let buttonReset       = null;
-let inputUrlLang      = null;
-let inputBeschreibung = null;
-let inputKuerzel      = null;
+let divErgebnis        = null;
+let buttonAnlegen      = null;
+let buttonReset        = null;
+let inputUrlLang       = null;
+let inputBeschreibung  = null;
+let inputKuerzel       = null;
+let linkErgebnisUrl    = null;
+let spanErgebnisUrl    = null;
+let pErgebnisNachricht = null;
 
 
 /**
@@ -13,12 +16,19 @@ let inputKuerzel      = null;
  */
 document.addEventListener( "DOMContentLoaded", function() {
 
-    divErgebnis       = document.getElementById( "ergebnisBox"         );
-    buttonAnlegen     = document.getElementById( "buttonAnlegen"       );
-    buttonReset       = document.getElementById( "buttonZuruecksetzen" );
-    inputUrlLang      = document.getElementById( "urlLang"             );
-    inputBeschreibung = document.getElementById( "beschreibung"        );
-    inputKuerzel      = document.getElementById( "kuerzelCode"         );
+    divErgebnis        = document.getElementById( "ergebnisBox"         );
+
+    buttonAnlegen      = document.getElementById( "buttonAnlegen"       );
+    buttonReset        = document.getElementById( "buttonZuruecksetzen" );
+
+    inputUrlLang       = document.getElementById( "urlLang"             );
+    inputBeschreibung  = document.getElementById( "beschreibung"        );
+    inputKuerzel       = document.getElementById( "kuerzelCode"         );
+
+    linkErgebnisUrl    = document.getElementById( "ergebnisLink"        );
+    spanErgebnisUrl    = document.getElementById( "ergebnisLinkText"    );
+
+    pErgebnisNachricht = document.getElementById( "ergebnisNachricht"   );
 
     buttonAnlegen.addEventListener( "click", onAnlegen       );
     buttonReset.addEventListener(   "click", onZuruecksetzen );
@@ -34,63 +44,60 @@ function onAnlegen() {
     const kuerzel      = inputKuerzel.value.trim();
     const beschreibung = inputBeschreibung.value.trim();
 
-    if (url.length === 0) {
+    if ( url.length === 0 ) {
 
         alert("Bitte eine URL eingeben!");
         return;
     }
-    if (kuerzel.length === 0) {
+    if ( kuerzel.length === 0 ) {
 
         alert("Bitte ein Kürzel eingeben!");
         return;
     }
-    if (beschreibung.length === 0) {
+    if ( beschreibung.length === 0 ) {
 
         alert("Bitte eine Beschreibung eingeben!");
         return;
     }
 
     const payloadObjekt = {
-        kuerzel: kuerzel,
-        url: url,
-        beschreibung: beschreibung
+        kuerzel      : kuerzel,
+        url          : url,
+        beschreibung : beschreibung
     };
 
 
     fetch( "/api/v1/shortlink/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify( payloadObjekt )
+        method  : "POST",
+        headers : { "Content-Type": "application/json" },
+        body    : JSON.stringify( payloadObjekt )
     })
-    .then( response => response.json() )
-    .then(data => {
+    .then( response => response.json()
+                               .then( data => ( { status: response.status, 
+                                                  body: data }) ) 
+         )
+    .then( result => {
 
-        ergebnisBox.style.display = "block"; // Ergebnis-Box auf "sichtbar" schalten
+        if ( result.status === 201 ) {
 
-        const resultBox         = document.getElementById("ergebnisBox"      );
-        const ergebnisNachricht = document.getElementById("ergebnisNachricht");
-        const ergebnisUrl       = document.getElementById("ergebnisUrl"      );
+            pErgebnisNachricht.innerHTML = "Kurzlink erfolgreich angelegt!";
 
-        if (data.erfolgreich) {
-
-            ergebnisNachricht.textContent = "Kurz-URL wurde angelegt:";
-
-            const neueKurzUrl = `http://localhost:8123/k/${data.kuerzel}`;
-
-            ergebnisUrl.href        = neueKurzUrl;
-            ergebnisUrl.textContent = neueKurzUrl;
-
-            resultBox.style.color = "green";
+            const shortLink = result.body.ergebnisLink;
+            spanErgebnisUrl.textContent = shortLink;
+            linkErgebnisUrl.href        = shortLink;
 
         } else {
 
-            ergebnisNachricht.textContent = "FEHLER: " + data.fehler;
-            resultBox.style.color = "red";
+            spanErgebnisUrl.textContent = "";
+            linkErgebnisUrl.href        = "";
+
+            const fehlermeldung = result.body.nachricht;
+            pErgebnisNachricht.innerHTML = "Fehler: " + fehlermeldung;
         }
     })
-    .catch((error) => {
+    .catch( ( fehler ) => {
 
-         alert("FEHLER: " + error);
+         alert( "FEHLER: " + fehler );
     });
 }
 
@@ -101,9 +108,11 @@ function onAnlegen() {
  */
 function onZuruecksetzen() {
 
-    divErgebnis.style.display = "none";
-
-    inputUrlLang.value      = "";
-    inputBeschreibung.value = "";
-    inputKuerzel.value      = "";
+    inputUrlLang.value           = "";
+    inputBeschreibung.value      = "";
+    inputKuerzel.value           = "";
+    spanErgebnisUrl.value        = "";
+    linkErgebnisUrl.href         = "";
+    spanErgebnisUrl.textContent  = "";
+    pErgebnisNachricht.innerHTML = "";    
 }
