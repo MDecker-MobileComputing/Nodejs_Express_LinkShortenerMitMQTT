@@ -5,7 +5,7 @@
       "entity": {
         "type": "Project",
         "id": "4271481c-b5d3-4194-aeb7-4a1973021fe4",
-        "name": "URL Shortener"
+        "name": "URL Shortener (Nodejs+MQTT)"
       },
       "children": [
         {
