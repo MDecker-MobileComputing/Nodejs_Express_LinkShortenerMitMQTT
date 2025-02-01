@@ -4,7 +4,6 @@ import useragent from "useragent";
 import { insert }                        from "./datenbank.js";
 import { queryRecordsByKuerzelUndDatum } from "./datenbank.js";
 import { queryRecordsByKuerzelUndMonat } from "./datenbank.js";
-//import { sendeBrowserDaten }             from "./kafka-sender.js";
 
 
 const logger = logging.default("service");
@@ -24,28 +23,6 @@ export async function statistikDatensatzVerbuchen(statistikObjekt) {
     await insert(statistikObjekt);
 
     logger.info(`Statistik-Datensatz verbucht: ${JSON.stringify(statistikObjekt)}`);
-
-    //await erstelleBrowserStatistikObjekt(statistikObjekt.userAgent);
-}
-
-
-async function erstelleBrowserStatistikObjekt(userAgentString) {
-
-    const userAgent = useragent.lookup(userAgentString);
-
-    const browserName    = `${userAgent.family} ${userAgent.major}`; // z.B. "Chrome 122" oder "Firefox 123"
-    const betriebssystem = `${userAgent.os.family} ${userAgent.os.major}`; // z.B. "Windows 10" oder "macOS 10.15"
-
-    const erfolgreich = await sendeBrowserDaten(browserName, betriebssystem);
-
-    if (erfolgreich) {
-
-        logger.info(`Browsername "${browserName}" und Betriebssystem "${betriebssystem}" via Kafka gesendet.`);
-
-    } else {
-
-        logger.error(`Browsername "${browserName}" und Betriebssystem "${betriebssystem}" konnten nicht via Kafka gesendet werden.`);
-    }
 }
 
 
