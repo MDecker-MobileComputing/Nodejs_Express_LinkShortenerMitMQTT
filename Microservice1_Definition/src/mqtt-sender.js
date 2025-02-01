@@ -10,6 +10,8 @@ const authObjekt = {
                      password: mqttKonfiguration.passwort
                    };
 
+logger.info( `Verbinde mit MQTT-Server ${mqttKonfiguration.url} ...` );
+
 const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
                                             authObjekt );
 

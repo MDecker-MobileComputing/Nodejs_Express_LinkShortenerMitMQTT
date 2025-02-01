@@ -12,7 +12,7 @@ services:
       - "8083:8083"
       - "8084:8084"
       - "8883:8883"
-      - "18083:18083"
+      - "18083:18083" # Web-UI, Default-Login: admin/public
     restart: always  # Optional: ensures the container restarts on failure
 
 
