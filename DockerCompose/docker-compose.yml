@@ -14,3 +14,6 @@ services:
       - "8883:8883"
       - "18083:18083"
     restart: always  # Optional: ensures the container restarts on failure
+
+
+# ToDo: Noch Loadbalancer (nginx) dazu

@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Link Shortener: Microservice "Definition"</title>
+    <title>Neue Kurz-URL anlegen</title>
     <meta charset="utf-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="linkshortner-mit-mqq.css">
 </head>
 <body>
 
-  <h1>Link Shortener: Microservice "Definition"</h1>
+    <h1>Neue Kurz-URL anlegen</h1>
 
-  <p>Dieser Microservice unterstützt keine Endpunkte für <tt>HTTP-GET</tt>.</p>
+    <div>
+        <label for="urlLang">Ziel-URL:</label>
+        <input type="text" id="urlLang" name="urlLang">
+
+        <label for="beschreibung">Beschreibung:</label>
+        <input type="text" id="beschreibung" name="beschreibung">
+
+        <label for="urlKurz">Kürzel/Code</label>
+        <input type="text" id="kuerzelCode" name="urlKurz">
+
+        <input type="button" id="buttonAnlegen"       value="Anlegen">
+        <input type="button" id="buttonZuruecksetzen" value="Eingaben zurücksetzen">
+    </div>
+
+
+    <br><br>
+
+    <div id="ergebnisBox">
+        <p id="ergebnisNachricht"></p>
+        <a id="ergebnisUrl" href="" target="_blank"></a>
+    </div>
+
+    <!-- Als letztes JavaScript laden, damit sich Seite schnell aufbaut. -->
+    <script src="linkshortener-mit-mqq.js"></script>
 
 </body>
+</html>
