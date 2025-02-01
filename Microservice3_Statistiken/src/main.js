@@ -3,7 +3,7 @@ import express from "express";
 
 import { datenbankInitialisieren } from "./datenbank.js";
 import { expressKonfigurieren    } from "./controller.js";
-import { kafkaEmpfaengerStarten  } from "./kafka-empfaenger.js";
+import { mqttEmpfaengerStarten   } from "./mqtt-empfaenger.js";
 
 const logger = logging.default("main-statistik");
 
@@ -15,7 +15,7 @@ const app = express();
 expressKonfigurieren(app);
 
 
-kafkaEmpfaengerStarten();
+mqttEmpfaengerStarten();
 
 
 // Web-Server starten

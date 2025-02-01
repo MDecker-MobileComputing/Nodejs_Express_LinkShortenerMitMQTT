@@ -1,4 +1,5 @@
-import logging             from "logging";
+import logging from "logging";
+import mqtt    from "mqtt";
 
 import mqttKonfiguration               from '../../mqtt-konfiguration.js';
 import { statistikDatensatzVerbuchen } from "./service.js";
@@ -12,7 +13,7 @@ const authObjekt = {
   };
 
 const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
-                           authObjekt );
+                                            authObjekt );
 
 logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
 

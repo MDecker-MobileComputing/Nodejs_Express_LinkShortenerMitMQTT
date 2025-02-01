@@ -9,6 +9,7 @@
     "logging": "^3.3.0",
     "lowdb": "^7.0.1",
     "moment": "^2.30.1",
+    "mqtt": "^5.10.3",
     "useragent": "^2.3.0"
   },
   "scripts": {
