@@ -6,7 +6,6 @@
  */
 const topicLinks        = "dozent/decker/linkshortener";
 const topicStatsLinks   = "dozent/decker/linkstats";
-const topicStatsBrowser = "dozent/decker/browserstats";
 
 
 const mqttKonfigRemote = {
@@ -14,8 +13,7 @@ const mqttKonfigRemote = {
     passwort  : "g3h3im",
     url       : "wss://mqtt.beispiel-host.de",
     topic1    : topicLinks,
-    topic2    : topicStatsLinks,
-    topic3    : topicStatsBrowser,
+    topic2    : topicStatsLinks
 };
 
 const mqttKonfigLokal = {
@@ -23,8 +21,7 @@ const mqttKonfigLokal = {
     passwort  : "s3cr3t",
     url       : "wss://localhost:8080",
     topic1    : topicLinks,
-    topic2    : topicStatsLinks,
-    topic3    : topicStatsBrowser,
+    topic2    : topicStatsLinks
 };
 
 
