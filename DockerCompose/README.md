@@ -27,3 +27,22 @@ Befehl zum Löschen (in Container gespeicherte Nachrichten mit URL-Definitionen 
 ```
 docker-compose down
 ```
+
+----
+
+## Admin-UI ##
+
+<br>
+
+Wenn der Container läuft, dann ist ein Web/Admin-UI unter http://localhost:18083/ verfügbar.
+
+<br>
+
+**Anmeldedaten:**
+
+* Nutzername: `admin`
+* Passwort: `public`
+
+Nach der ersten Anmeldung muss ein neues Passwort vergeben werden.
+
+<br>

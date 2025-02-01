@@ -6,5 +6,5 @@ node_modules/
 datenbank-*.json
 db.json
 
-# Nutzername+Passwort für Kafka-Server
+# Nutzername+Passwort für MQTT-Server
 mqtt-konfiguration.js
