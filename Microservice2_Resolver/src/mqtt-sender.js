@@ -1,19 +1,10 @@
-import mqtt    from "mqtt";
 import logging from "logging";
 
+import mqttClient        from './mqtt-init.js';
 import mqttKonfiguration from '../../mqtt-konfiguration.js';
 
-const logger = logging.default( "mqtt-sender" );
 
-const authObjekt = {
-                     username: mqttKonfiguration.nutzername,
-                     password: mqttKonfiguration.passwort
-                   };
-
-const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url, authObjekt );
-
-logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
-
+const logger = logging.default( "mqtt-empfaenger" );
 
 
 /**
