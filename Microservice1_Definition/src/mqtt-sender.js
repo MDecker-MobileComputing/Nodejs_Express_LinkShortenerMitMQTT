@@ -1,7 +1,7 @@
 
 import logging           from "logging";
 import mqtt              from "mqtt";
-import mqttKonfiguration from '../../mqtt-konfiguration.js';
+import mqttKonfiguration from "../../mqtt-konfiguration.js";
 
 
 const logger = logging.default( "mqtt-sender" );
