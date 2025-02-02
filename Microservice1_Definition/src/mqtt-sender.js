@@ -11,12 +11,12 @@ const authObjekt = {
                      password: mqttKonfiguration.passwort
                    };
 
-logger.info( `Verbinde mit MQTT-Server ${mqttKonfiguration.url} ...` );
+logger.info( `Versuche Verbindung zu MQTT-Server ${mqttKonfiguration.url} aufzubauen ...` );
+
 
 const mqttClient = await mqtt.connectAsync( mqttKonfiguration.url,
                                             authObjekt );
-
-logger.info( `MQTT-Verbindung hergestellt zu Server ${mqttKonfiguration.url}` );
+logger.info( `Verbindung zu MQTT-Server aufgebaut, ClientID=${mqttClient.options.clientId}` );
 
 
 /**
