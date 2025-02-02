@@ -41,7 +41,7 @@ export async function mqttEmpfaengerStarten() {
             }
         });
 
-        logger.info( `MQTT-Subscription für Topic ${mqttKonfiguration.topi2} gestartet.` );
+        logger.info( `MQTT-Subscription für Topic ${mqttKonfiguration.topic2} gestartet.` );
     }
     catch (error) {
 

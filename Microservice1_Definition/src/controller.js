@@ -73,7 +73,7 @@ async function postShortlink(request, response) {
         return;
     }
 
-    objNeu.ergebnisLink = `http://localhost:9001/r/${kuerzel}`;
+    objNeu.ergebnisLink = `http://localhost:8001/r/${kuerzel}`;
 
     response.status(201) // Created
             .send(objNeu);

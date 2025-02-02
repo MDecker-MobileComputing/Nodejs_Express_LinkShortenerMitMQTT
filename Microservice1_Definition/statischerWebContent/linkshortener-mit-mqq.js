@@ -40,6 +40,8 @@ document.addEventListener( "DOMContentLoaded", function() {
  */
 function onAnlegen() {
 
+    ausgabefelderZuruecksetzen();
+
     const url          = inputUrlLang.value.trim();
     const kuerzel      = inputKuerzel.value.trim();
     const beschreibung = inputBeschreibung.value.trim();
@@ -80,6 +82,8 @@ function onAnlegen() {
 
         if ( result.status === 201 ) {
 
+            eingabefelderZuruecksetzen();
+
             pErgebnisNachricht.innerHTML = "Kurzlink erfolgreich angelegt!";
 
             const shortLink = result.body.ergebnisLink;
@@ -103,16 +107,35 @@ function onAnlegen() {
 
 
 /**
- * Bei Klick auf Button "Eingaben zurücksetzen" wird hiermit auch die
- * "ergebnisBox" ausgeblendet.
+ * Event-Handler für Button "Eingaben zurücksetzen". Es werden sowohl die Ein- 
+ * als auch die Ausgabefelder zurückgesetzt.
  */
 function onZuruecksetzen() {
 
-    inputUrlLang.value           = "";
-    inputBeschreibung.value      = "";
-    inputKuerzel.value           = "";
+    eingabefelderZuruecksetzen();
+    ausgabefelderZuruecksetzen();
+}
+
+
+/**
+ * Eingabefelder im Formular zurücksetzen.
+ */
+function eingabefelderZuruecksetzen() {
+
+    inputUrlLang.value      = "";
+    inputBeschreibung.value = "";
+    inputKuerzel.value      = "";
+}
+
+
+/**
+ * Ausgabefelder (Ergebnis-URL und Nachricht) zurücksetzen.
+ */
+function ausgabefelderZuruecksetzen() {
+
     spanErgebnisUrl.value        = "";
-    linkErgebnisUrl.href         = "";
     spanErgebnisUrl.textContent  = "";
+
+    linkErgebnisUrl.href         = "";
     pErgebnisNachricht.innerHTML = "";    
 }
