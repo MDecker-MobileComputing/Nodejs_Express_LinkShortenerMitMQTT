@@ -50,3 +50,14 @@ Diese Anwendung mit Nodejs und Kafka:
 siehe [dieses Repo](https://github.com/MDecker-MobileComputing/Nodejs_Express_LinkShortenerMitKafka)
 
 <br>
+
+----
+
+## License ##
+
+<br>
+
+See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License)
+for the files in this repository.
+
+<br>
