@@ -1,9 +1,9 @@
 import logging from "logging";
 
-import mqttClient from './mqtt-init.js';
-
 import { neuOderAktualisieren } from "./service.js";
-import mqttKonfiguration        from '../../mqtt-konfiguration.js';
+
+import mqttKonfiguration from '../../mqtt-konfiguration.js';
+import mqttClient        from './mqtt-init.js';
 
 
 const logger = logging.default( "mqtt-empfaenger" );
