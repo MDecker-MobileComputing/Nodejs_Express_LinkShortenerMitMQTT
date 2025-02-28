@@ -60,21 +60,17 @@ async function postShortlink(request, response) {
     };
 
     const fehlerObjekt = await shortlinkNeu(objNeu);
-    if (fehlerObjekt.nutzerfehler) {
-
+    if (fehlerObjekt.nutzerFehler) {
         response.status(409) // Conflict
-                .send({ "nachricht": `Shortlink mit Code/Kürzel "${kuerzel}" existiert bereits.`});
+                .send({ "nachricht": `Shortlink mit Code "${kuerzel}" existiert bereits.`});
         return;
     }
     if (fehlerObjekt.mqttFehler) {
-
         response.status(500) // Internal Server Error
-        .send({ "nachricht": `Shortlink mit Code/Kürzel "${kuerzel}" konnte nicht über MQTT versendet werden.`});
+                .send({ "nachricht": `Shortlink mit Code "${kuerzel}" konnte nicht versendet werden.` });
         return;
     }
-
-    objNeu.ergebnisLink = `http://localhost:8001/r/${kuerzel}`;
-
+    objNeu.ergebnisLink = `http://localhost:9001/r/${kuerzel}`;
     response.status(201) // Created
             .send(objNeu);
 }

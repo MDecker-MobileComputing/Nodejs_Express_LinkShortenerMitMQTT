@@ -1,18 +1,27 @@
-# Dockerfile to build Load Balancer #
+# Load Balancer in Docker #
 
 <br>
 
-This folder contains a [Dockerfile](./Dockerfile), that builds an image for
-a load balancer in front of the two instances of microservice 2 (resolver).
-As load balancer [nginx](https://nginx.org/en/) is used, therefore the base
-image is `nginx:alpine`.
+Dieser Ordner enthält eine [Dockerfile](./Dockerfile), die ein Image für einen
+*Load Balancer* vor den beiden Instanzen des Microservice 2 (Resolver) erstellt.
+Als *Load Balancer* wird [nginx](https://nginx.org/en/) verwendet, daher ist das
+Basis-Image `nginx:alpine`.
 
 <br>
 
-Command to build an image according to this `Dockerfile`:
+Befehl zum Erstellen eines Images gemäß dieser `Dockerfile`:
 
 ```
 docker build --tag mide/loadbalancer-for-linkshortener-on-nodejs:1.0.0 .
+```
+
+<br>
+
+Wenn das Image lokal erstellt wurde, dann kann ein darauf basierender Container
+mit dem folgenden Befehl gestartet werden:
+
+```
+docker-compose up
 ```
 
 <br>

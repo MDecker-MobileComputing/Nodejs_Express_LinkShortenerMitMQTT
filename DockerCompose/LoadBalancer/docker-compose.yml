@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  loadbalancer:
+    image: mide/loadbalancer-for-linkshortener-on-nodejs:1.0.0
+    container_name: loadbalancer-for-linkshortener-on-nodejs
+    ports:
+      - "9000:80"
+    restart: always  # Optional: ensures the container restarts on failure

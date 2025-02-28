@@ -43,7 +43,7 @@ export async function shortlinkNeu( shortlinkObjekt ) {
     if ( dbErgebnis ) {
 
         logger.info( `Shortlink existiert bereits: ${shortlinkObjekt.kuerzel}` );
-        return { nutzerfehler: "Shortlink existiert bereits" };
+        return { nutzerFehler: "Shortlink existiert bereits" };
     }
 
     shortlinkObjekt.passwort = passwortGenerieren();

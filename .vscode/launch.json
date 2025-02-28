@@ -24,7 +24,7 @@
             "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
             "cwd": "${workspaceFolder}/Microservice2_Resolver",
             "env": {
-                "PORTNUMMER": "8001"
+                "PORTNUMMER": "9001"
             }
         },
         {
@@ -37,7 +37,7 @@
             "program": "${workspaceFolder}/Microservice2_Resolver/src/main.js",
             "cwd": "${workspaceFolder}/Microservice2_Resolver",
             "env": {
-                "PORTNUMMER": "8002"
+                "PORTNUMMER": "9002"
             }
         }, {
                 "type": "node",
