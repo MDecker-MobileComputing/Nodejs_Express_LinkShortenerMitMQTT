@@ -1,6 +1,6 @@
-import logging from "logging";
+import createLogger from "logging";
 
-const logger = logging.default("mw-allgemein");
+const logger = createLogger("mw-allgemein");
 
 
 /**

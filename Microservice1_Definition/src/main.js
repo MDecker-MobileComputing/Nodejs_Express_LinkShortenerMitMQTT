@@ -1,12 +1,12 @@
-import logging from "logging";
-import express from "express";
+import createLogger from "logging";
+import express      from "express";
 
 import { routenRegistrieren      } from "./controller.js";
 import { datenbankInitialisieren } from "./datenbank.js";
 import { mwRequestLogger         } from "./middleware-allgemein.js";
 import { mwCatchIllegalJson      } from "./middleware-allgemein.js";
 
-const logger = logging.default( "main-definition" );
+const logger = createLogger( "main-definition" );
 
 
 // Express.js konfigurieren

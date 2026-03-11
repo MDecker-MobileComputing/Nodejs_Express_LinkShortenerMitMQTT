@@ -1,5 +1,5 @@
-import logging   from "logging";
-import validator from "validator";
+import createLogger from "logging";
+import validator    from "validator";
 
 import { pruefeAenderungspasswort } from "./service.js";
 
@@ -7,7 +7,7 @@ import { pruefeAenderungspasswort } from "./service.js";
 // Diese Datei enthält Middleware-Funktionen, die speziell für einzelne REST-Endpunkte
 // registriert werden. Sie sind nicht allgemein für alle Endpunkte gültig.
 
-const logger = logging.default("mw-individuell");
+const logger = createLogger("mw-individuell");
 
 
 /**

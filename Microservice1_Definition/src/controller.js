@@ -1,4 +1,4 @@
-import logging from "logging";
+import createLogger from "logging";
 
 import { shortlinkNeu,
          shortlinkAendern } from "./service.js";
@@ -11,7 +11,7 @@ import { mwCheckPflichtfelderNeuerShortlink,
          mwCheckAenderungspasswort,
          mwCheckKuerzel             } from "./middleware-individuell.js";
 
-const logger = logging.default("controller");
+const logger = createLogger("controller");
 
 
 /**

@@ -1,10 +1,10 @@
-import logging from "logging";
+import createLogger from "logging";
 
 import { getShortlinkByKuerzel } from "./datenbank.js";
 import { upsert                } from "./datenbank.js";
 import { sendeMqttNachricht    } from "./mqtt-sender.js";
 
-const logger = logging.default( "service" );
+const logger = createLogger( "service" );
 
 
 /**
