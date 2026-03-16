@@ -1,7 +1,7 @@
-import logging from "logging";
+import createLogger from "logging";
 
 
-const logger = logging.default("middleware-funktionen");
+const logger = createLogger("middleware-funktionen");
 
 
 /**

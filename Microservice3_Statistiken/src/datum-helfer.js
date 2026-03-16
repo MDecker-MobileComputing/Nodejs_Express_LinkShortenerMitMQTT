@@ -1,7 +1,7 @@
-import moment  from "moment";
-import logging from "logging";
+import moment       from "moment";
+import createLogger from "logging";
 
-const logger = logging.default("datum-helfer");
+const logger = createLogger("datum-helfer");
 
 
 /**

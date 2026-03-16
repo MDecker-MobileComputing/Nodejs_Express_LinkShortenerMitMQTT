@@ -1,11 +1,11 @@
-import logging from "logging";
-import express from "express";
+import createLogger from "logging";
+import express      from "express";
 
 import { datenbankInitialisieren } from "./datenbank.js";
 import { expressKonfigurieren    } from "./controller.js";
 import { mqttEmpfaengerStarten   } from "./mqtt-empfaenger.js";
 
-const logger = logging.default( "main-statistik" );
+const logger = createLogger( "main-statistik" );
 
 
 await datenbankInitialisieren();

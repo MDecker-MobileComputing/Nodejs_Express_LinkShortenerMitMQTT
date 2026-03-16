@@ -1,6 +1,6 @@
 import express         from "express";
 import expressNunjucks from "express-nunjucks";
-import logging         from "logging";
+import createLogger    from "logging";
 import moment          from "moment";
 
 import { checkDatum }               from "./datum-helfer.js";
@@ -11,7 +11,7 @@ import { checkKuerzel }             from "./service.js";
 import { mwRequestLogger }          from "./middleware.js";
 
 
-const logger = logging.default("controller");
+const logger = createLogger("controller");
 
 
 /**

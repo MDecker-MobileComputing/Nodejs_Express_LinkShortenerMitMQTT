@@ -1,11 +1,11 @@
-import logging from "logging";
-import mqtt    from "mqtt";
+import createLogger from "logging";
+import mqtt         from "mqtt";
 
 import mqttKonfiguration               from '../../mqtt-konfiguration.js';
 import { statistikDatensatzVerbuchen } from "./service.js";
 
 
-const logger = logging.default( "mqtt-empfaenger" );
+const logger = createLogger( "mqtt-empfaenger" );
 
 const authObjekt = {
     username: mqttKonfiguration.nutzername,

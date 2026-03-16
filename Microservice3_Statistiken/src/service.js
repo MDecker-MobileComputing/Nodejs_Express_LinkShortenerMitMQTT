@@ -1,12 +1,12 @@
-import logging   from "logging";
-import useragent from "useragent";
+import createLogger from "logging";
+import useragent    from "useragent";
 
 import { insert }                        from "./datenbank.js";
 import { queryRecordsByKuerzelUndDatum } from "./datenbank.js";
 import { queryRecordsByKuerzelUndMonat } from "./datenbank.js";
 
 
-const logger = logging.default("service");
+const logger = createLogger("service");
 
 
 /**
