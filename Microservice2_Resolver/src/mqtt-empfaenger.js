@@ -1,4 +1,4 @@
-import logging from "logging";
+import createLogger from "logging";
 
 import { neuOderAktualisieren } from "./service.js";
 
@@ -6,7 +6,7 @@ import mqttKonfiguration from '../../mqtt-konfiguration.js';
 import mqttClient        from './mqtt-init.js';
 
 
-const logger = logging.default( "mqtt-empfaenger" );
+const logger = createLogger( "mqtt-empfaenger" );
 
 
 /**

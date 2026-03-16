@@ -1,10 +1,10 @@
-import logging from "logging";
+import createLogger from "logging";
 
 import mqttClient        from './mqtt-init.js';
 import mqttKonfiguration from '../../mqtt-konfiguration.js';
 
 
-const logger = logging.default( "mqtt-empfaenger" );
+const logger = createLogger( "mqtt-empfaenger" );
 
 
 /**

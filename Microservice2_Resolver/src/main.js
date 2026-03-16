@@ -1,6 +1,6 @@
 import express         from "express";
 import expressNunjucks from "express-nunjucks";
-import logging         from "logging";
+import createLogger    from "logging";
 import moment          from "moment";
 
 import { routenRegistrieren      } from "./controller.js";
@@ -8,7 +8,7 @@ import { datenbankInitialisieren } from "./datenbank.js";
 import { mqttEmpfaengerStarten   } from "./mqtt-empfaenger.js";
 
 
-const logger = logging.default("main-resolver");
+const logger = createLogger("main-resolver");
 
 // Portnummer aus Umgebungsvariablen auslesen (Fallback-Wert: 8000)
 const PORTNUMMER = process.env.PORTNUMMER || 8000;

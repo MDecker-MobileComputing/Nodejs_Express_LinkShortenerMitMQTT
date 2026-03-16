@@ -1,7 +1,7 @@
 import { JSONFilePreset } from "lowdb/node";
-import logging            from "logging";
+import createLogger       from "logging";
 
-const logger = logging.default("datenbank");
+const logger = createLogger("datenbank");
 
 
 // Anfangsdaten, wenn die Datenbank-Datei noch nicht existiert

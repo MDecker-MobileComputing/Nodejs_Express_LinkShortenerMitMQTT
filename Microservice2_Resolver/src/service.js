@@ -1,11 +1,12 @@
-import logging from "logging";
+import createLogger from "logging";
 
 import { getByKuerzel, upsert    } from "./datenbank.js";
 import { sendeStatistikNachricht } from "./mqtt-sender.js";
 
-const logger = logging.default( "service" );
+const logger = createLogger( "service" );
 
 
+/**
 /**
  * Service-Funktion für Auflösen von Shortlink.
  *

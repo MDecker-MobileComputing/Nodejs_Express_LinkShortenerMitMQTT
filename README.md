@@ -11,7 +11,7 @@ und [Nodejs](https://nodejs.org/en/about):
 * Der Resolver-Dienst verwendet die Template-Engine [Nunjucks](https://mozilla.github.io/nunjucks/) zur Erzeugung
   der Ergebnis-Seiten.
 
-* Es gibt auch noch einen Statistik-Service der weitere Möglichkeiten mit Nunjucks demonstriert.
+* Es gibt auch noch einen Statistik-Service, der weitere Möglichkeiten mit Nunjucks demonstriert.
 
 <br>
 
@@ -24,8 +24,8 @@ und [Nodejs](https://nodejs.org/en/about):
 | Microservice         | Instanz          | Portnummer                      |
 | -------------------- | ---------------- | ------------------------------- |
 | Shortlink Definition | Nur eine Instanz |  [7000](http://localhost:7000)  |
-| Shortlink Resolver   | Instanz 1        |  [8001](http://localhost:8001)  |
-| Shortlink Resolver   | Instanz 2        |  [8002](http://localhost:8002)  |
+| Shortlink Resolver   | Instanz 1        |  [9001](http://localhost:8001)  |
+| Shortlink Resolver   | Instanz 2        |  [9002](http://localhost:8002)  |
 | Statistiken          | Nur eine Instanz |  [9000](http://localhost:9000)  |
 
 <br>
