@@ -3,7 +3,7 @@
   "type": "module",
   "dependencies": {
     "cross-env": "^10.1.0",
-    "express": "^4.21.2",
+    "express": "^5.2.1",
     "express-nunjucks": "^3.1.2",
     "logging": "^4.2.0",
     "lowdb": "^7.0.1",
