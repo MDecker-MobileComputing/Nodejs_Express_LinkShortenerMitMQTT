@@ -57,7 +57,8 @@ async function getKuerzel(request, response) {
             url          : ergObjekt.url,
             beschreibung : ergObjekt.beschreibung,
             erstellt_am  : ergObjekt.erstellt_am,
-            geaendert_am : ergObjekt.geaendert_am
+            geaendert_am : ergObjekt.geaendert_am,
+            statlink     : ergObjekt.statlink
         });
     }
 }

@@ -1,4 +1,5 @@
 import createLogger from "logging";
+import moment       from "moment";
 
 import { getByKuerzel, upsert    } from "./datenbank.js";
 import { sendeStatistikNachricht } from "./mqtt-sender.js";
@@ -40,6 +41,9 @@ export async function shortlinkAufloesen( kuerzel, userAgentString ) {
 
             logger.info( `Kürzel gefunden, ist aktiv: ${kuerzel}` );
             await statistikNachrichtSenden( kuerzel, true, userAgentString );
+
+            const datumHeute = moment( new Date() ).format( "YYYY-MM-DD" );
+            dbErgebnisObjekt.statlink = `http://localhost:9000/ts/${kuerzel}/${datumHeute}`;
 
             return dbErgebnisObjekt;
         }
